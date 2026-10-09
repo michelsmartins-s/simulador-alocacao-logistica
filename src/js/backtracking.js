@@ -1,27 +1,21 @@
 // -----------------------------
-// TCA: Algoritmo de backtracking para alocação de cargas em container
+// Módulo de Alocação de Cargas
 // -----------------------------
 
-{
-    // -------------------------------------------------
-    // Classe Carga
-    // Representa um item com altura, largura e valor
-    // -------------------------------------------------
+
     class Carga {
         constructor(height, width, value, id) {
             this.height = height;
             this.width = width;
             this.value = value;
             this.id = id;
-            this.valuePerSize = value / (height * width); // valor por área
+            this.valuePerSize = value / (height * width);
         }
         
-        // Retorna uma cópia da carga
         clone() {
             return new Carga(this.height, this.width, this.value, this.id); 
         }
 
-        // Retorna uma cópia rotacionada (troca height/width)
         rotateClone() {
             let clone = this.clone();
             let t = clone.height;
@@ -31,10 +25,6 @@
         }
     }
 
-    // ----------------------------------------------------------
-    // Classe Container
-    // Representa a matriz onde as cargas serão inseridas
-    // ----------------------------------------------------------
     class Container {
         constructor(height = 7, width = 3, format = null) {
 
@@ -58,22 +48,9 @@
             this.width = width;
         }
 
-        // Clona o container
         clone() {
             return new Container (this.height, this.width, JSON.parse(JSON.stringify(this.format)));
         }
-
-        // Exibe o container no console
-        showContainer() {
-
-            console.log("o container está cheio");
-            for (let line = 0; line < this.format.length; line++) {
-                console.log("-------------");
-                console.log("| " + this.format[line].join(" | ") + " |");
-            }
-
-        console.log("-------------");
-        }   
     }
 
     // ----------------------------------------------------------
