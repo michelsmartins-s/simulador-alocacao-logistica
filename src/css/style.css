@@ -1,0 +1,103 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: Tahoma, "Segoe UI", Arial, sans-serif;
+}
+
+body {
+    background-color: #d8d8d8;
+    color: #111111;
+    display: grid;
+    grid-template-columns: 185px 1fr;
+    grid-template-rows: 58px 1fr;
+    height: 100vh;
+}
+
+.header-logo {
+    background-color: #c8c8c8;
+    border-right: 2px solid #808080;
+    border-bottom: 2px solid #808080;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+}
+
+.header-logo img {
+    max-width: 155px;
+    max-height: 46px;
+    object-fit: contain;
+}
+
+.header-busca {
+    background-color: #cfcfcf;
+    border-bottom: 2px solid #808080;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+}
+
+.buscador {
+    display: flex;
+    align-items: center;
+    border-top: 1.5px solid #666666;
+    border-left: 1.5px solid #666666;
+    border-right: 1.5px solid #ffffff;
+    border-bottom: 1.5px solid #ffffff;
+    padding: 4px 8px;
+    width: 350px;
+    background: #ffffff;
+}
+
+.buscador img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+}
+
+.buscador input {
+    border: none;
+    outline: none;
+    width: 100%;
+    margin-left: 6px;
+    font-size: 0.85rem;
+    background: transparent;
+}
+
+.sidebar {
+    background-color: #c8c8c8;
+    border-right: 2px solid #808080;
+    padding: 14px 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.menu-btn {
+    display: block;
+    width: 100%;
+    padding: 9px 10px;
+    text-align: center;
+    text-decoration: none;
+    color: #111111;
+    background-color: #dedede;
+    border-top: 2px solid #ffffff;
+    border-left: 2px solid #ffffff;
+    border-right: 2px solid #666666;
+    border-bottom: 2px solid #666666;
+    font-size: 0.88rem;
+    font-weight: bold;
+}
+
+.menu-btn:hover {
+    background-color: #e6e6e6;
+}
+
+.menu-btn.ativo {
+    background-color: #5a626a;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    outline: 1px solid #222222;    
+}
