@@ -28,10 +28,10 @@ CREATE TABLE processo (
     porto_origem TEXT,
     porto_destino TEXT,
     peso_bruto INT,
-    comprador REFERENCES clientes(id),
+    comprador UUID REFERENCES clientes(id),
     fatura_client TEXT,
     local_inspecao TEXT,
-    inspetor REFERENCES inspetores(id),
+    inspetor UUID REFERENCES inspetores(id),
     status_processo TEXT DEFAULT 'Registrado',
     criado_em TIMESTAMP WITH TIME ZONE DEFAULT NOW()
 );
