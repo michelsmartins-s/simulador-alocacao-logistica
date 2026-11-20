@@ -73,3 +73,51 @@ if (btnAddContainer) {
     btnAddContainer.onclick = adicionarContainer;
 }
 
+async function carregarClientes() {
+    const { data, error } = await db
+        .from('clientes')
+        .select('id, nome')
+        .order('nome');
+
+    if (error) {
+        console.error('Erro ao buscar clientes:', error);
+        return;
+    }
+
+    const selectCliente = document.getElementById('cliente');
+    const selectComprador = document.getElementById('comprador');
+
+    for (let i = 0; i < data.length; i++) {
+        let item = data[i];
+        let optionHTML = '<option value="' + item.id + '">' + item.nome + '</option>';
+
+        selectCliente.innerHTML += optionHTML;
+        selectComprador.innerHTML += optionHTML;
+    }
+}
+
+carregarClientes();
+
+async function carregarTiposContainers() {
+    const { data, error } = await db
+        .from('tipos_container')
+        .select('id, nome')
+        .order('nome');
+
+    if (error) {
+        console.error('Erro ao buscar tipos de container:', error);
+        return;
+    }
+
+    const selectTipoContainer = document.querySelector('select[name="tipo_container"]');
+
+    for (let i = 0; i < data.length; i++) {
+        let item = data[i];
+        let optionHTML = '<option value="' + item.id + '">' + item.nome + '</option>';
+
+        selectTipoContainer.innerHTML += optionHTML;
+    }
+}
+
+carregarTiposContainers();
+
