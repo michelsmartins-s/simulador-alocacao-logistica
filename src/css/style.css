@@ -242,3 +242,12 @@ body {
     font-size: 0.84rem;
     font-weight: bold;
 }
+
+.workspace {
+    padding: 16px 20px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    background-color: #dcdcdc;
+}
