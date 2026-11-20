@@ -1,5 +1,6 @@
 let btnAddContainer = document.getElementById('btn-add-container');
 let listaContainers = document.getElementById('lista-containers-form');
+let opcoesTipoContainer = '<option value="">Selecione...</option>';
 
 function atualizarNumeracao() {
     let itens = listaContainers.querySelectorAll('.container-item');
@@ -26,7 +27,7 @@ function adicionarContainer() {
             '<div class="form-grupo">' +
                 '<label>Tipo</label>' +
                 '<select name="tipo_container">' +
-                    '<option value="">Selecione...</option>' +
+                    opcoesTipoContainer +
                 '</select>' +
             '</div>' +
             '<div class="form-grupo">' +
@@ -87,19 +88,20 @@ async function carregarClientes() {
     }
 }
 
-carregarClientes();
-
 async function carregarTiposContainers() {
     const tipos_container = await buscarTiposContainer();
     const selectTipoContainer = document.querySelector('select[name="tipo_container"]');
 
+    opcoesTipoContainer = '<option value="">Selecione...</option>';
+
     for (let i = 0; i < tipos_container.length; i++) {
         let item = tipos_container[i];
-        let optionHTML = '<option value="' + item.id + '">' + item.nome + '</option>';
+        opcoesTipoContainer += '<option value="' + item.id + '">' + item.nome + '</option>';
 
-        selectTipoContainer.innerHTML += optionHTML;
+        selectTipoContainer.innerHTML = opcoesTipoContainer;
     }
 }
 
+carregarClientes();
 carregarTiposContainers();
 
