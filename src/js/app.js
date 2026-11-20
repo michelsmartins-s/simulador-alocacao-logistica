@@ -90,7 +90,7 @@ async function carregarClientes() {
 carregarClientes();
 
 async function carregarTiposContainers() {
-    const tipos_container = buscarTiposContainer();
+    const tipos_container = await buscarTiposContainer();
     const selectTipoContainer = document.querySelector('select[name="tipo_container"]');
 
     for (let i = 0; i < tipos_container.length; i++) {
