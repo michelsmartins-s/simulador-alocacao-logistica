@@ -306,3 +306,14 @@ body {
     color: #555555;
     padding: 14px;
 }
+
+.btn-remover-container {
+    padding: 3px 8px;
+    font-size: 0.76rem;
+    background-color: #e0b4b4;
+    color: #5a0000;
+}
+
+.btn-remover-container:hover {
+    background-color: #eabcbc;
+}
