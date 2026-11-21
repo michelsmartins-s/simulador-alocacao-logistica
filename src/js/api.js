@@ -143,3 +143,16 @@ async function buscarProcessoPorId(id) {
     return data;
 }
 
+async function excluirProcesso (idProcesso) {
+    const { data, error } = await db
+        .from('processo')
+        .delete()
+        .eq('id', idProcesso);
+
+    if (error) {
+        console.error('Erro ao excluir processo', error);
+        return false;
+    }
+    return true;
+}
+
