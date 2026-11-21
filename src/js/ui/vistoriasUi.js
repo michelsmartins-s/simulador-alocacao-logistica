@@ -30,7 +30,7 @@ function renderizarTabelaVistorias (lista) {
             '<td>' + nomeCliente + '</td>' +
             '<td>' + nomeComprador + '</td>' +
             '<td>' + navioInfo + '</td>' +
-            '<td>' + qtdContainers + ' container(s)</td>' +
+            '<td>' + qntdContainers + ' container(s)</td>' +
             '<td>' + formatarStatus(p.status_processo) + '</td>' +
             '<td style="display: flex; gap: 6px;">' +
                 '<button type="button" class="btn btn-save btn-gerar-pdf" data-id="' + p.id + '">Gerar PDF</button>' +
