@@ -65,6 +65,7 @@ function limparFormulario() {
     }
 
     resetarContainersFormulario();
+    processoEmEdicaoId = null;
 }
 
 function preencherFormularioComProcesso() {

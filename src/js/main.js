@@ -32,4 +32,14 @@ async function iniciarSistema() {
     await carregarTabelaProcessos();
 }
 
+let processoEmEdicaoId = null;
+
+async function abrirProcessoParaEdicao(id) {
+    const processo = await buscarProcessoPorId(id);
+    if (!processo) return;
+
+    processoEmEdicaoId = processo.id;
+    preencherFormularioComProcesso(processo);
+}
+
 iniciarSistema();

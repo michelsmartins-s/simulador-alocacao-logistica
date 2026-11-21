@@ -41,3 +41,11 @@ async function carregarTabelaProcessos() {
         tbody.appendChild(tr);
     }
 }
+
+const botoesAbrir = tbody.querySelectorAll('.btn-detalhes');
+for (let i = 0; i < botoesAbrir.length; i++) {
+    botoesAbrir[i].onclick = function () {
+        const id = this.getAttribute('data-id');
+        abrirProcessoParaEdicao(id)
+    }
+}
