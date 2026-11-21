@@ -142,6 +142,9 @@ async function salvarProcesso() {
         const listaParaSalvar =  await informacaoesContainersFormulario(processoCriado.id);
         await inserirContainers(listaParaSalvar);
     }
+
+    await limparFormulario();
+    await carregarProcessos();
 }
 
 if (btnsalvarProcesso) {
@@ -228,6 +231,24 @@ async function carregarProcessos () {
             '</td>';
 
         tbody.appendChild(tr);
+    }
+}
+
+async function limparFormulario() {
+    const form = document.getElementById('form-processo');
+    if (form) {
+        form.reset();
+    }
+
+    const checkConcluido = document.getElementById('processo_concluido');
+    if (checkConcluido) {
+        checkConcluido.checked = false;
+    }
+
+    if (listaContainers) {
+        listaContainers.innerHTML = '';
+        adicionarContainer();
+        await carregarTiposContainers();
     }
 }
 
