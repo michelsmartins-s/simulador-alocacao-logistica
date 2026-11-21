@@ -53,3 +53,25 @@ async function inserirContainers(listaContainers) {
     }
     return data;
 }
+
+async function uploadFotoContainer(arquivo, processoId) {
+    const extensao = arquivo.name.split('.').pop();
+    const nomeUnico = `${processoId}/${Date.now()}-${Math.random().toString(36).substring(2, 8)}.${extensao}`;
+    
+    const { data, error } = await db
+        .storage
+        .from('vistorias-fotos')
+        .upload(nomeUnico, arquivo);
+
+    if (error) {
+        console.error('Erro ao fazer upload da foto:', error);
+        return null;
+    }
+
+    const { data: urlData } = db
+        .storage
+        .from('vistorias-fotos')
+        .getPublicUrl(nomeUnico);
+    
+    return urlData.publicUrl;
+}

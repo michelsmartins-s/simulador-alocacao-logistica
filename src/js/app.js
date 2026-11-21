@@ -56,7 +56,7 @@ function adicionarContainer() {
             '</div>' +
             '<div class="form-grupo">' +
                 '<label>Fotos da Vistoria</label>' +
-                '<input type="file" name="fotos" accept="image/*" capture="environment" multiple>' +
+                '<input type="file" name="fotos" accept="image/*" multiple>' +
             '</div>' +
         '</div>';
 
@@ -139,7 +139,7 @@ async function salvarProcesso() {
     const processoCriado = await inserirProcessos(dadosProcesso);
 
     if(processoCriado) {
-        const listaParaSalvar = informacaoesContainersFormulario(processoCriado.id);
+        const listaParaSalvar =  await informacaoesContainersFormulario(processoCriado.id);
         await inserirContainers(listaParaSalvar);
     }
 }
@@ -148,11 +148,12 @@ if (btnsalvarProcesso) {
     btnsalvarProcesso.onclick = salvarProcesso;
 }
 
-function informacaoesContainersFormulario(processoId) {
+async function informacaoesContainersFormulario(processoId) {
     const itens = listaContainers.querySelectorAll('.container-item');
     const containers = [];
 
     for (let i = 0; i < itens.length; i++) {
+        let urlFotos = [];
         const item = itens[i];
         const numeroContainer = item.querySelector('input[name="numero_container"]').value;
 
@@ -163,6 +164,11 @@ function informacaoesContainersFormulario(processoId) {
         const quantidadeItens = item.querySelector('input[name="quantidade_itens"]').value;
         const pesoItens = item.querySelector('input[name="peso_container"]').value;
         const observacoes = item.querySelector('input[name="observacoes"]').value || null
+        const inputFotos = item.querySelector('input[name="fotos"]');
+
+        for(let j = 0; j < inputFotos.files.length; j++) {
+            urlFotos.push(await uploadFotoContainer(inputFotos.files[j], processoId));
+        }
 
         containers.push({
         processo_id: processoId,
@@ -173,7 +179,8 @@ function informacaoesContainersFormulario(processoId) {
         produto_descricao: produtoDescricao,
         quantidade_itens: parseInt(quantidadeItens, 10),
         peso_container: parseFloat(pesoItens),
-        observacoes: observacoes
+        observacoes: observacoes,
+        fotos_urls: urlFotos
         });
     }
 
