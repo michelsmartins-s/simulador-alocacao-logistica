@@ -1,3 +1,5 @@
+let todosOsProcessos = [];
+
 function formatarStatus(status) {
     const s = (status || '').toLowerCase();
     if (s === 'concluido' || s === 'concluído') {
@@ -14,7 +16,7 @@ async function removerVistoria(id) {
     const apagou = await excluirProcesso(id);
     if (apagou) {
         todosOsProcessos = await buscarProcessos();
-        renderizarTabelaVistorias(todosOsProcessos());
+        renderizarTabelaVistorias(todosOsProcessos);
     }
 }
 
@@ -23,7 +25,7 @@ function renderizarTabelaVistorias (lista) {
     if (!tbody) return;
 
     if (!lista || lista.length === 0) {
-        tbody.innerHTML = '<tr><td> colspan="7" class="tabela-vazia">Nenhuma vistoria encontrada.</td></tr>';
+        tbody.innerHTML = '<tr><td colspan="7" class="tabela-vazia">Nenhuma vistoria encontrada.</td></tr>';
         return;
     }
 
@@ -47,6 +49,7 @@ function renderizarTabelaVistorias (lista) {
             '<td style="display: flex; gap: 6px;">' +
                 '<button type="button" class="btn btn-save btn-gerar-pdf" data-id="' + p.id + '">Gerar PDF</button>' +
                 '<button type="button" class="btn btn-editar-vistoria" data-id="' + p.id + '">Editar</button>' +
+                '<button type="button" class="btn btn-remover-container btn-excluir-vistoria" data-id="' + p.id + '">Excluir</button>' +
             '</td>';
         
 
@@ -68,11 +71,14 @@ function renderizarTabelaVistorias (lista) {
             window.location.href = 'index.html?editar=' + id
         }
     }
-}
 
-async function iniciarPaginaVistorias() {
-    todosOsProcessos = await buscarProcessos();
-    renderizarTabelaVistorias(todosOsProcessos);
+    const botoesExcluir = tbody.querySelectorAll('.btn-excluir-vistoria');
+    for (let i = 0; i < botoesExcluir.length; i++) {
+        botoesExcluir[i].onclick = function () {
+            const id = this.getAttribute('data-id');
+            removerVistoria(id);
+        }
+    }
 }
 
 function aplicarFiltrosVistorias() {
