@@ -319,6 +319,12 @@ body {
 }
 
 @media (max-width: 758px) {
+    html, body {
+        width: 100%;
+        max-width: 100vw;
+        overflow-x: hidden;
+    }
+
     body {
         grid-template-columns: 1fr;
         grid-template-rows: auto auto auto 1fr;
@@ -360,6 +366,10 @@ body {
         overflow-y: visible;
     }
 
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
     .painel-header, .lista-header {
         flex-direction: column;
         align-items: flex-start;
@@ -377,6 +387,6 @@ body {
     }
 
     .tabela-dados {
-        min-width: 620px;
+        min-width: 600px;
     }
 }
