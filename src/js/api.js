@@ -75,3 +75,23 @@ async function uploadFotoContainer(arquivo, processoId) {
     
     return urlData.publicUrl;
 }
+
+async function buscarProcessos() {
+    const { data, error } = await db
+        .from('processo')
+        .select(`
+            *,
+            cliente_dados:clientes!processo_cliente_fkey(nome),
+            comprador_dados:clientes!processo_comprador_fkey(nome),
+            containers_processo(id, numero_container, fotos_urls)
+        `)
+        .order('criado_em', {ascending: false});
+
+    if (error) {
+        console.error('Erro ao buscar processos:', error);
+        return [];
+    }
+
+    return data;
+}
+
