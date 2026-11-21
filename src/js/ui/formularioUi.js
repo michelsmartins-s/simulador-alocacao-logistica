@@ -68,7 +68,7 @@ function limparFormulario() {
     processoEmEdicaoId = null;
 }
 
-function preencherFormularioComProcesso() {
+function preencherFormularioComProcesso(processo) {
     document.getElementById('numero_inspecao').value = processo.numero_inspecao || '';
     document.getElementById('cliente').value = processo.cliente || '';
     document.getElementById('comprador').value = processo.comprador || '';

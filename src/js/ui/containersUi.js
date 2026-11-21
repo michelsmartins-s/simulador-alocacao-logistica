@@ -140,9 +140,8 @@ function preencherContainersNoFormulario(containers) {
         cardAtual.querySelector('input[name="quantidade_itens"]').value = (c.quantidade_itens !== null) ? c.quantidade_itens : '';
         cardAtual.querySelector('input[name="peso_container"]').value = (c.peso_container !== null) ? c.peso_container : '';
         cardAtual.querySelector('input[name="observacoes"]').value = c.observacoes || '';
-    }
 
-    if (c.fotos_urls && c.fotos_urls.length > 0) {
+        if (c.fotos_urls && c.fotos_urls.length > 0) {
         const divFotos = document.createElement('div');
         divFotos.className = 'fotos-salvas';
         divFotos.style.marginTop = '8px';
@@ -153,6 +152,7 @@ function preencherContainersNoFormulario(containers) {
         }
         divFotos.innerHTML = linksHTML;
         cardAtual.appendChild(divFotos);
+    }
     }
 }
 
