@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Macrimar Log - Vistorias e Laudos</title>
+    <link rel="icon" type="image/webp" href="img/MacrimarLogo.webp">
+    <link rel="stylesheet" href="css/modern-normalize.css">
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <div class="header-logo">
+        <img src="img/MacrimarLogo.webp" alt="Macrimar Gerenciamento Logístico">
+    </div>
+
+    <header class="header-busca">
+        <div class="buscador">
+            <img src="img/lupa.png" alt="">
+            <input type="text" id="busca-geral" placeholder="Buscar processo, DUIMP ou container...">
+        </div>
+    </header>
+
+    <aside class="sidebar">
+        <a href="index.html" class="menu-btn ativo">Painel Geral</a>
+        <a href="laudos.html" class="menu-btn">Vistorias</a>
+        <a href="simulador.html" class="menu-btn">Simulador</a>
+    </aside>
+
+    <main class="workspace">
+        <section class="lista-processos">
+            <div class="lista-header">
+                <h2>Laudos e Vistorias</h2>
+                <div class="header-actions">
+                    <label for="filtro-status" style="font-size: 0.82rem; font-weight: bold;">Status</label>
+                    <select id="filtro-status" style="padding: 4px 8px; font-size: 0.82rem;">
+                        <option value="todos">Todos</option>
+                        <option value="concluido">Concluídos</option>
+                        <option value="inconcluido">Inconcluídos</option>
+                    </select>
+                </div>
+            </div>
+
+            <table class="tabela-dados">
+                <thead>
+                    <tr>
+                        <th>Nº Relatório</th>
+                        <th>Cliente</th>
+                        <th>Comprador</th>
+                        <th>Navio / DUIMP</th>
+                        <th>Containers</th>
+                        <th>Status</th>
+                        <th>Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabela-todas-vistorias"></tbody>
+                <tr>
+                    <td colspan="7" class="tabela-vazia">Carregando vistorias...</td>
+                </tr>
+            </table>
+        </section>
+    </main>
+
+    <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+    <script src="js/supabase.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/ui/vistoriasUi.js"></script>
+</body>
+</html>
