@@ -6,6 +6,18 @@ function formatarStatus(status) {
     return '<span style="color: #b35900; font-weight: bold;">Inconcluído</span>';
 }
 
+async function removerVistoria(id) {
+    if (!confirm('Tem certeza que deseja excluir esse processo?')) {
+        return;
+    }
+
+    const apagou = await excluirProcesso(id);
+    if (apagou) {
+        todosOsProcessos = await buscarProcessos();
+        renderizarTabelaVistorias(todosOsProcessos());
+    }
+}
+
 function renderizarTabelaVistorias (lista) {
     const tbody = document.getElementById('tabela-todas-vistorias');
     if (!tbody) return;
