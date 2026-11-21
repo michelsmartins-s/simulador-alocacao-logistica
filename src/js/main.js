@@ -2,6 +2,23 @@ async function salvarNovoProcesso() {
     const dadosProcesso = lerDadosProcessoDoFormulario();
     if (!dadosProcesso) return;
 
+    if (processoEmEdicaoId) {
+        if (!dadosProcesso.status_processo) {
+            dadosProcesso.status_processo = 'inconcluído';
+        }
+
+        const processoAtualizado = await atualizarProcesso(processoEmEdicaoId, dadosProcesso);
+        if (processoAtualizado) {
+            await deletarContainersDoProcesso(processoEmEdicaoId);
+            const listaParaSalvar = await lerContainersDoFormulario(processoEmEdicaoId);
+            await inserirContainers(listaParaSalvar);
+
+            limparFormulario();
+            await carregarTabelaProcessos();
+        }
+        return;
+    }
+
     const processoCriado = await inserirProcessos(dadosProcesso);
 
     if (processoCriado) {
