@@ -58,6 +58,11 @@ function renderizarTabelaVistorias (lista) {
     }
 }
 
+async function iniciarPaginaVistorias() {
+    todosOsProcessos = await buscarProcessos();
+    renderizarTabelaVistorias(todosOsProcessos);
+}
 
+iniciarPaginaVistorias();
 
 
