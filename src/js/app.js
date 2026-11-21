@@ -102,6 +102,56 @@ async function carregarTiposContainers() {
     }
 }
 
+const btnsalvarProcesso = document.getElementById('btn-salvar-processo');
+
+async function salvarProcesso() {
+    const numeroInspecao = document.getElementById('numero_inspecao').value;
+    const cliente = document.getElementById('cliente').value || null;
+    const comprador = document.getElementById('comprador').value || null;
+    const vessel = document.getElementById('vessel').value;
+    const eta = document.getElementById('eta').value || null;
+    const booking = document.getElementById('booking').value;
+    const portoOrigem = document.getElementById('porto_origem').value;
+    const portoDestino = document.getElementById('porto_destino').value;
+    const faturaCliente = document.getElementById('fatura_cliente').value;
+    const localInspecao = document.getElementById('local_inspecao').value;
+    const concluido = document.getElementById('check-concluido').checked;
+
+    if (numeroInspecao === '' ) {
+        alert('Por favor, preencha o Nº Relatório');
+        return;
+    }
+
+    const dadosProcesso = {
+        numero_inspecao: numeroInspecao,
+        cliente: cliente,
+        comprador: comprador,
+        vessel: vessel,
+        eta: eta,
+        booking: booking,
+        porto_origem: portoOrigem,
+        porto_destino: portoDestino,
+        fatura_cliente: faturaCliente,
+        local_inspecao: localInspecao,
+        status_processo: concluido ? 'concluido' : undefined
+    };
+
+    const processoCriado = await inserirProcessos(dadosProcesso);
+
+    if (processoCriado) {
+        console.log('Processo salvo com sucesso! ID gerado:', processoCriado.id);
+        alert('Processo salvo! ID: ' + processoCriado.id);
+    } else {
+        alert('Erro ao salvar o processo. Veja o console (F12).');
+    }
+}
+
+if (btnsalvarProcesso) {
+    btnsalvarProcesso.onclick = salvarProcesso;
+}
+
 carregarClientes();
 carregarTiposContainers();
+
+
 

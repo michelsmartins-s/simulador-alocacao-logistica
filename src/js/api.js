@@ -25,3 +25,18 @@ async function buscarTiposContainer() {
     }
     return data;
 }
+
+async function inserirProcessos(dadosProcesso) {
+    const { data, error } = await db
+        .from('processo')
+        .insert(dadosProcesso)
+        .select()
+        .single();
+
+    if (error) {
+        console.error('Erro ao inserir processo:', error);
+        return null;
+    }
+
+    return data;
+}
