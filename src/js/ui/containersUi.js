@@ -7,11 +7,11 @@ function atualizarNumeracaoContainers() {
     for (let i = 0; i < itens.length; i++) {
         const titulo = itens[i].querySelector('.container-item-header span');
         titulo.textContent = 'Container #' + (i + 1);
-    }
 
-    const btnRemover = itens[i].querySelector('.btn-remover-container');
-    if (btnRemover) {
-        btnRemover.style.display = (i === 0) ? 'none' : 'inline-block';
+         const btnRemover = itens[i].querySelector('.btn-remover-container');
+        if (btnRemover) {
+            btnRemover.style.display = (i === 0) ? 'none' : 'inline-block';
+        }
     }
 }
 
@@ -82,7 +82,6 @@ async function lerContainersDoFormulario(processoId) {
     const containers = [];
 
     for (let i = 0; i < itens.length; i++) {
-        const urlFotos = [];
         const item = itens[i];
         const numeroContainer = item.querySelector('input[name="numero_container"]').value;
         const tipoContainer = item.querySelector('select[name="tipo_container"]').value || null;
@@ -94,8 +93,12 @@ async function lerContainersDoFormulario(processoId) {
         const observacoes = item.querySelector('input[name="observacoes"]').value || null;
         const inputFotos = item.querySelector('input[name="fotos"]');
 
+        const fotosAntigas = item.dataset.fotosExistentes ? JSON.parse(item.dataset.fotosExistentes) : [];
+        const urlFotos = [...fotosAntigas];
+
         for (let j = 0; j < inputFotos.files.length; j++) {
-            urlFotos.push(await uploadFotoContainer(inputFotos.files[j], processoId));
+            const novaUrl = await uploadFotoContainer(inputFotos.files[j], processoId);
+            if (novaUrl) urlFotos.push(novaUrl);
         }
 
         containers.push({
@@ -155,6 +158,7 @@ function preencherContainersNoFormulario(containers) {
         for (let j = 0; j < c.fotos_urls.length; j++) {
             linksHTML += `<a href="${c.fotos_urls[j]}" target="_blank" style="margin-right: 8px;">Foto ${j + 1}</a>`;
         }
+        cardAtual.dataset.fotosExistentes = JSON.stringify(c.fotos_urls || []);
         divFotos.innerHTML = linksHTML;
         cardAtual.appendChild(divFotos);
     }
