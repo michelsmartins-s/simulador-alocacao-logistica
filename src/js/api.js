@@ -95,3 +95,21 @@ async function buscarProcessos() {
     return data;
 }
 
+async function buscarProcessoPorId(id) {
+    const { data, error } = await db
+        .from('processo') 
+        .select(`
+            *,
+            containers_processo(*)
+        `)
+        .eq('id', id)
+        .single();
+
+        if (error) {
+        console.error('Erro ao buscar detalhes do processo:', error);
+        return null;
+    }
+
+    return data;
+}
+
