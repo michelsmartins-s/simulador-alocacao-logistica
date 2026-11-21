@@ -317,3 +317,66 @@ body {
 .btn-remover-container:hover {
     background-color: #eabcbc;
 }
+
+@media (max-width: 758px) {
+    body {
+        grid-template-columns: 1fr;
+        grid-template-rows: auto auto auto 1fr;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .header-logo {
+        border-right: none;
+        padding: 10px;
+    }
+
+    .header-busca {
+        padding: 10px, 12px;
+        flex-wrap: wrap;
+        gap: 8px;
+    }
+
+    .buscador {
+        width: 100%;
+    }
+
+    .sidebar {
+        flex-direction: row;
+        border-right: none;
+        border-bottom: 2px solid #808080;
+        padding: 8px 10px;
+        overflow-x: auto;
+    }
+
+    .menu-btn {
+        flex: 1;
+        white-space: nowrap;
+        padding: 8px 10px;
+    }
+
+    .workspace {
+        padding: 12px;
+        overflow-y: visible;
+    }
+
+    .painel-header, .lista-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .header-actions {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .lista-processos {
+        overflow-x: auto;
+    }
+
+    .tabela-dados {
+        min-width: 620px;
+    }
+}
