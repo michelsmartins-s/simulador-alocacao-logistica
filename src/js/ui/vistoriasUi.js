@@ -63,6 +63,57 @@ async function iniciarPaginaVistorias() {
     renderizarTabelaVistorias(todosOsProcessos);
 }
 
+function aplicarFiltrosVistorias() {
+    const termo = document.getElementById('busca-geral').value.toLowerCase();
+    const statusFiltro = document.getElementById('filtro-status').value;
+    const filtrados = [];
+
+    for (let i = 0; i < todosOsProcessos.length; i++) {
+        const p = todosOsProcessos[i];
+
+        const ehConcluido = (p.status_processo === 'concluido' || p.status_processo === 'concluído');
+        if (statusFiltro === 'concluido' && !ehConcluido) continue;
+        if (statusFiltro === 'inconcluido' && ehConcluido) continue;
+
+        if (termo === '') {
+            filtrados.push(p);
+            continue;
+        }
+
+        const nomeCliente = p.cliente_dados ? p.cliente_dados.nome : '';
+        const nomeComprador = p.comprador_dados ? p.comprador_dados.nome : '';
+        
+        let textoBusca = (p.numero_inspecao + ' ' + nomeCliente + ' ' + nomeComprador + ' ' + (p.vessel || '') + ' ' + (p.booking || '')).toLowerCase();
+
+        if (p.containers_processo) {
+            for (let j = 0; j < p.containers_processo.length; j++) {
+                textoBusca += ' ' + (p.containers_processo[j].numero_container || '').toLowerCase();
+            }
+        }
+
+        if (textoBusca.includes(termo)) {
+            filtrados.push(p);
+        }
+    }
+
+    renderizarTabelaVistorias(filtrados);
+}
+
+async function iniciarPaginaVistorias() {
+    todosOsProcessos = await buscarProcessos();
+    renderizarTabelaVistorias(todosOsProcessos);
+
+    const inputBusca = document.getElementById('busca-geral');
+    if (inputBusca) {
+        inputBusca.addEventListener('input', aplicarFiltrosVistorias);
+    }
+
+    const selectStatus = document.getElementById('filtro-status');
+    if (selectStatus) {
+        selectStatus.addEventListener('change', aplicarFiltrosVistorias);
+    }
+}
+
 iniciarPaginaVistorias();
 
 
