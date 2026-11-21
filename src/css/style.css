@@ -390,3 +390,94 @@ body {
         min-width: 600px;
     }
 }
+
+@media (max-width: 768px) {
+    html, body {
+        width: 100%;
+        max-width: 100%;
+        overflow-x: hidden;
+    }
+
+    body {
+        display: flex;
+        flex-direction: column;
+        height: auto;
+        min-height: 100vh;
+    }
+
+    .header-logo {
+        border-right: none;
+        padding: 10px;
+        width: 100%;
+    }
+
+    .header-busca {
+        padding: 10px 12px;
+        flex-wrap: wrap;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .buscador {
+        width: 100%;
+    }
+
+    .sidebar {
+        flex-direction: row;
+        border-right: none;
+        border-bottom: 2px solid #808080;
+        padding: 8px 10px;
+        gap: 8px;
+        width: 100%;
+    }
+
+    .menu-btn {
+        flex: 1;
+        white-space: nowrap;
+        padding: 8px 6px;
+    }
+
+    .workspace {
+        padding: 10px;
+        width: 100%;
+        overflow-x: hidden;
+    }
+
+    .painel,
+    .lista-processos {
+        padding: 12px;
+        width: 100%;
+        max-width: 100%;
+    }
+
+    .form-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .painel-header,
+    .lista-header {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+
+    .header-actions {
+        width: 100%;
+        flex-wrap: wrap;
+        justify-content: space-between;
+    }
+
+    .form-grupo input,
+    .form-grupo select,
+    .buscador input {
+        font-size: 16px;
+        width: 100%;
+    }
+
+    .tabela-dados {
+        display: block;
+        width: 100%;
+        overflow-x: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+}
