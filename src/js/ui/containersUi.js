@@ -8,6 +8,11 @@ function atualizarNumeracaoContainers() {
         const titulo = itens[i].querySelector('.container-item-header span');
         titulo.textContent = 'Container #' + (i + 1);
     }
+
+    const btnRemover = itens[i].querySelector('.btn-remover-container');
+    if (btnRemover) {
+        btnRemover.style.display = (i === 0) ? 'none' : 'inline-block';
+    }
 }
 
 function adicionarContainer() {
