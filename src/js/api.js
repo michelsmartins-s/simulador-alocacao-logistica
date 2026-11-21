@@ -40,3 +40,16 @@ async function inserirProcessos(dadosProcesso) {
 
     return data;
 }
+
+async function inserirContainers(listaContainers) {
+    const { data, error } = await db
+        .from('containers_processo')
+        .insert(listaContainers)
+        .select();
+
+    if (error) {
+        console.error('Erro ao inserir processo:', error);
+        return null;
+    }
+    return data;
+}

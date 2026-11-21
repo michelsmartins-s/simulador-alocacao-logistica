@@ -138,16 +138,46 @@ async function salvarProcesso() {
 
     const processoCriado = await inserirProcessos(dadosProcesso);
 
-    if (processoCriado) {
-        console.log('Processo salvo com sucesso! ID gerado:', processoCriado.id);
-        alert('Processo salvo! ID: ' + processoCriado.id);
-    } else {
-        alert('Erro ao salvar o processo. Veja o console (F12).');
+    if(processoCriado) {
+        const listaParaSalvar = informacaoesContainersFormulario(processoCriado.id);
+        await inserirContainers(listaParaSalvar);
     }
 }
 
 if (btnsalvarProcesso) {
     btnsalvarProcesso.onclick = salvarProcesso;
+}
+
+function informacaoesContainersFormulario(processoId) {
+    const itens = listaContainers.querySelectorAll('.container-item');
+    const containers = [];
+
+    for (let i = 0; i < itens.length; i++) {
+        const item = itens[i];
+        const numeroContainer = item.querySelector('input[name="numero_container"]').value;
+
+        const tipoContainer = item.querySelector('select[name="tipo_container"]').value || null;
+        const dataDescarregamento = item.querySelector('input[name="data_descarregamento"]').value || null;
+        const lacreNumero = item.querySelector('input[name="lacre_numero"]').value || null;
+        const produtoDescricao = item.querySelector('input[name="produto_descricao"]').value || null
+        const quantidadeItens = item.querySelector('input[name="quantidade_itens"]').value;
+        const pesoItens = item.querySelector('input[name="peso_container"]').value;
+        const observacoes = item.querySelector('input[name="observacoes"]').value || null
+
+        containers.push({
+        processo_id: processoId,
+        numero_container: numeroContainer,
+        tipo_container: tipoContainer,
+        data_descarregamento: dataDescarregamento,
+        lacre_numero: lacreNumero,
+        produto_descricao: produtoDescricao,
+        quantidade_itens: parseInt(quantidadeItens, 10),
+        peso_container: parseFloat(pesoItens),
+        observacoes: observacoes
+        });
+    }
+
+    return containers;
 }
 
 carregarClientes();
