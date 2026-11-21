@@ -2,7 +2,7 @@
 // Módulo de Alocação de Cargas
 // -----------------------------
 
-
+{
     class Carga {
         constructor(height, width, value, id) {
             this.height = height;
