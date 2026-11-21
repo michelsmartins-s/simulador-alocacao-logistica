@@ -41,6 +41,36 @@ async function inserirProcessos(dadosProcesso) {
     return data;
 }
 
+async function atualizarProcesso(id, dadosProcesso) {
+    const { data, error } = await db
+        .from('processo')
+        .update(dadosProcesso)
+        .eq('id', id)
+        .select()
+        .single();
+
+        if (error) {
+    console.error('Erro ao atualizar processo:', error.message, error.details, error.hint);
+    return null;
+}
+
+    return data;
+}
+
+async function deletarContainersDoProcesso(processoId) {
+    const { error } = await db
+        .from('containers_processo')
+        .delete()
+        .eq('processo_id', processoId);
+
+    if (error) {
+        console.error('Erro ao limpar containers antigos:', error);
+        return false;
+    }
+
+    return true;
+}
+
 async function inserirContainers(listaContainers) {
     const { data, error } = await db
         .from('containers_processo')
