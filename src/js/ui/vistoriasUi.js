@@ -40,4 +40,24 @@ function renderizarTabelaVistorias (lista) {
 
         tbody.appendChild(tr);
     }
+
+    const botoesPdf = tbody.querySelectorAll('.btn-gerar-pdf');
+    for (let i = 0; i < botoesPdf.length; i++) {
+        botoesPdf[i].onclick = function () {
+            const id = this.getAttribute('data-id');
+            gerarRelatorioPdf(id);
+        }
+    }
+
+    const botoesEditar = tbody.querySelectorAll('.btn-editar-vistoria');
+    for (let i = 0; i < botoesEditar.length; i++) {
+        botoesEditar[i].onclick = function () {
+            const id = this.getAttribute('data-id');
+            window.location.href = 'index.html?editar=' + id
+        }
+    }
 }
+
+
+
+
