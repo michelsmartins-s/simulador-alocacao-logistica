@@ -156,3 +156,32 @@ async function excluirProcesso (idProcesso) {
     return true;
 }
 
+async function inserirCliente(dadosCliente) {
+    const { data, error } = db
+        .from('clientes')
+        .insert(dadosCliente)
+        .select()
+        .single();
+
+    if (error) {
+        console.error('Erro ao inserar cliente: ', error);
+        return null;
+    }
+    return data;
+}
+
+async function excluirCliente(id) {
+    const { error } = db
+        .from('clientes')
+        .delete()
+        .eq('id', id);
+
+    if (error) {
+        console.error('Erro ao excluir cliente: ', error);
+        return false;
+    }
+    return true;
+}
+
+
+
