@@ -35,7 +35,7 @@ function renderizarTabelaVistorias (lista) {
         const p = lista[i];
 
         const nomeCliente = p.cliente_dados ? p.cliente_dados.nome : 'Não informado';
-        const nomeComprador = nomeCliente;
+        const nomeComprador = p.comprador_dados ? p.comprador_dados.nome : 'Não informado';
         const navioInfo = p.booking ? `${p.vessel || ''} / ${p.booking}` : (p.vessel || '-');
         const qntdContainers = p.containers_processo ? p.containers_processo.length : 0;
         const tr = document.createElement('tr');
@@ -60,7 +60,6 @@ function renderizarTabelaVistorias (lista) {
     for (let i = 0; i < botoesPdf.length; i++) {
         botoesPdf[i].onclick = function () {
             const id = this.getAttribute('data-id');
-            gerarRelatorioPdf(id);
         }
     }
 
