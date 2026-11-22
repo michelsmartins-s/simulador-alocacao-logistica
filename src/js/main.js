@@ -47,6 +47,12 @@ async function iniciarSistema() {
     await carregarClientesNoFormulario();
     await carregarTiposContainerNoFormulario();
     await carregarTabelaProcessos();
+
+    const parametros = new URLSearchParams(window.location.search);
+    const idEdicao = parametros.get('editar');
+    if (idEdicao) {
+        await abrirProcessoParaEdicao(idEdicao);
+    }
 }
 
 let processoEmEdicaoId = null;
