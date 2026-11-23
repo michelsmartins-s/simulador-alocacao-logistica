@@ -41,3 +41,27 @@ function renderizarTabelaClientes (lista) {
         }
     }
 }
+
+async function salvarNovoCliente() {
+    const inputNome = document.getElementById('nome_cliente');
+    const inputDoc = document.getElementById('cnpj_cpf');
+
+    const nome = inputNome.value;
+    const cnpjCpf = inputDoc.value;
+
+    if (!nome) {
+        alert('Por favor, insira todas as informações');
+        return;
+    }
+
+    const criado = await inserirCliente({
+        nome: nome,
+        cnpj_cpf: cnpjCpf
+    });
+
+    if (criado) {
+        document.getElementById('form-cliente').reset();
+        todosOsClientes = await buscarClientes();
+        renderizarTabelaClientes(todosOsClientes);
+    }
+}
