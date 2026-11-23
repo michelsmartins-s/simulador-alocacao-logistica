@@ -65,3 +65,20 @@ async function salvarNovoCliente() {
         renderizarTabelaClientes(todosOsClientes);
     }
 }
+
+function filtrarClientes() {
+    const termo = document.getElementById('busca-clientes').value.toLowerCase();
+    const filtrados = [];
+
+    for (let i = 0; i < todosOsClientes.length; i++) {
+        const cliente = todosOsClientes[i];
+        const nome = (cliente.nome || '').toLowerCase();
+        const documento = (cliente.cnpj_cpf || '').toLowerCase();
+
+        if (nome.includes(termo) || documento.includes(termo)) {
+            filtrados.push(cliente);
+        }
+    }
+
+    renderizarTabelaClientes(filtrados);
+}
