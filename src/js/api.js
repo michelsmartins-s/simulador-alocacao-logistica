@@ -3,7 +3,7 @@
 async function buscarClientes() {
     const { data, error } = await db
         .from('clientes')
-        .select('id, nome')
+        .select('id, nome, cnpj_cpf')
         .order('nome');
 
     if(error) {
@@ -157,7 +157,7 @@ async function excluirProcesso (idProcesso) {
 }
 
 async function inserirCliente(dadosCliente) {
-    const { data, error } = db
+    const { data, error } = await db
         .from('clientes')
         .insert(dadosCliente)
         .select()
@@ -171,7 +171,7 @@ async function inserirCliente(dadosCliente) {
 }
 
 async function excluirCliente(id) {
-    const { error } = db
+    const { error } = await db
         .from('clientes')
         .delete()
         .eq('id', id);
