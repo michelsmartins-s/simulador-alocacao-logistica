@@ -82,3 +82,20 @@ function filtrarClientes() {
 
     renderizarTabelaClientes(filtrados);
 }
+
+async function iniciarPaginaClientes() {
+    const btnSalvar = document.getElementById('btn-salvar-cliente');
+    if (btnSalvar) {
+        btnSalvar.onclick = salvarNovoCliente;
+    }
+
+    const inputBusca = document.getElementById('busca-clientes');
+    if (inputBusca) {
+        inputBusca.addEventListener('input', filtrarClientes);
+    }
+
+    todosOsClientes = await buscarClientes();
+    renderizarTabelaClientes(todosOsClientes);
+}
+
+iniciarPaginaClientes();
