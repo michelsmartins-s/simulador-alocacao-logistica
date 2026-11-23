@@ -21,7 +21,6 @@ async function carregarTiposContainerNoFormulario() {
         opcoesTipoContainer += '<option value="' + item.id + '">' + item.nome + '</option>';
     }
 
-    // Atualiza todos os selects de tipo_container que já estejam na tela
     const selects = document.querySelectorAll('select[name="tipo_container"]');
     for (let i = 0; i < selects.length; i++) {
         selects[i].innerHTML = opcoesTipoContainer;
@@ -49,7 +48,7 @@ function lerDadosProcessoDoFormulario() {
         porto_destino: document.getElementById('porto_destino').value,
         fatura_cliente: document.getElementById('fatura_cliente').value,
         local_inspecao: document.getElementById('local_inspecao').value,
-        status_processo: concluido ? 'concluido' : undefined
+        status_processo: concluido ? 'concluido' : 'Inconcluido'
     };
 }
 

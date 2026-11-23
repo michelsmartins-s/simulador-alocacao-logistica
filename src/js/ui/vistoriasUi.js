@@ -87,8 +87,8 @@ function aplicarFiltrosVistorias() {
 
     for (let i = 0; i < todosOsProcessos.length; i++) {
         const p = todosOsProcessos[i];
-
-        const ehConcluido = (p.status_processo === 'concluido' || p.status_processo === 'concluído');
+        
+        const ehConcluido = (p.status_processo === 'concluido' || p.status_processo === 'concluído').toLowerCase();
         if (statusFiltro === 'concluido' && !ehConcluido) continue;
         if (statusFiltro === 'inconcluido' && ehConcluido) continue;
 
